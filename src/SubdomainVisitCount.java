@@ -12,18 +12,18 @@ public class SubdomainVisitCount {
         List<String> result = new ArrayList<>();
 
         for (String cpdomain : cpdomains) {
-            int index = cpdomain.indexOf(' ');
-            int count = Integer.parseInt(cpdomain.substring(0, index));
-            String domain = cpdomain.substring(index + 1);
+            int spaceIndex = cpdomain.indexOf(' ');
+            int count = Integer.parseInt(cpdomain.substring(0, spaceIndex));
+            String domain = cpdomain.substring(spaceIndex + 1);
             table.put(domain, table.getOrDefault(domain, 0) + count);
 
-            int firstIndex = domain.indexOf('.');
-            int lastIndex = domain.lastIndexOf('.');
-            String key = domain.substring(firstIndex + 1);
+            int firstDotIndex = domain.indexOf('.');
+            int lastDotIndex = domain.lastIndexOf('.');
+            String key = domain.substring(firstDotIndex + 1);
             table.put(key, table.getOrDefault(key, 0) + count);
 
-            if (firstIndex != lastIndex) {
-                key = domain.substring(lastIndex + 1);
+            if (firstDotIndex != lastDotIndex) {
+                key = domain.substring(lastDotIndex + 1);
                 table.put(key, table.getOrDefault(key, 0) + count);
             }
         }
