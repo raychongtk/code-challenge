@@ -19,9 +19,9 @@ public class ValidSudoku {
         }
 
         int rowBucket = 0;
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < 9; i++) {
             int columnBucket = 0;
-            for (int j = 0; j < board[i].length; j++) {
+            for (int j = 0; j < 9; j++) {
                 if (i != 0 && j == 0 && i % 3 == 0) rowBucket += 3;
                 if (j != 0 && j % 3 == 0) columnBucket++;
                 if (board[i][j] == '.') continue;
