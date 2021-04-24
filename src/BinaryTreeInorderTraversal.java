@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author raychong
@@ -7,16 +8,21 @@ import java.util.List;
 public class BinaryTreeInorderTraversal {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        inorder(root, result);
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+
+            cur = stack.pop();
+            result.add(cur.val);
+            cur = cur.right;
+        }
+
         return result;
-    }
-
-    private void inorder(TreeNode node, List<Integer> result) {
-        if (node == null) return;
-
-        inorder(node.left, result);
-        result.add(node.val);
-        inorder(node.right, result);
     }
 
     public static class TreeNode {

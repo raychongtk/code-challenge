@@ -1,27 +1,28 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 /**
  * @author raychong
  */
-public class BinaryTreePreorderTraversal {
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
+public class BinaryTreePostorderTraversal {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList<>();
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
-
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
+
             if (node == null) return result;
 
-            result.add(node.val);
-            if (node.right != null) {
-                stack.push(node.right);
-            }
+            result.addFirst(node.val);
 
             if (node.left != null) {
                 stack.push(node.left);
+            }
+
+            if (node.right != null) {
+                stack.push(node.right);
             }
         }
 
