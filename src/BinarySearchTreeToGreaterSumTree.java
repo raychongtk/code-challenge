@@ -4,6 +4,8 @@ import java.util.Stack;
  * @author raychong
  */
 public class BinarySearchTreeToGreaterSumTree {
+    private int sum = 0;
+
     public TreeNode bstToGst(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
@@ -19,6 +21,16 @@ public class BinarySearchTreeToGreaterSumTree {
             sum = cur.val;
             cur = cur.left;
         }
+        return root;
+    }
+
+    public TreeNode convertBST(TreeNode root) {
+        if (root == null) return null;
+
+        convertBST(root.right);
+        sum += root.val;
+        root.val = sum;
+        convertBST(root.left);
         return root;
     }
 
