@@ -1,2 +1,2 @@
-# leetcode
-just for learning purpose
+# LEETCODE
+FOR LEARNING ONLY
