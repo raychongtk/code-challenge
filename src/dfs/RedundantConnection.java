@@ -26,12 +26,8 @@ public class RedundantConnection {
             if (graph.containsKey(edge[0]) && graph.containsKey(edge[1]) && dfs(graph, edge[0], edge[1])) {
                 return edge;
             }
-            List<Integer> connections = graph.getOrDefault(edge[0], new ArrayList<>());
-            List<Integer> connections2 = graph.getOrDefault(edge[1], new ArrayList<>());
-            connections.add(edge[1]);
-            connections2.add(edge[0]);
-            graph.put(edge[0], connections);
-            graph.put(edge[1], connections2);
+            graph.computeIfAbsent(edge[0], x -> new ArrayList<>()).add(edge[1]);
+            graph.computeIfAbsent(edge[1], x -> new ArrayList<>()).add(edge[0]);
         }
         return new int[]{-1, -1};
     }
