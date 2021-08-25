@@ -5,35 +5,26 @@ package string;
  */
 public class StringCompression {
     public int compress(char[] chars) {
-        char current = chars[0];
-        int currentIndex = 0;
-        int count = 0;
+        int i = 0, j = 0;
 
-        for (char c : chars) {
-            if (current == c) {
+        while (j < chars.length) {
+            int count = 0;
+            char current = chars[j];
+            while (j < chars.length && current == chars[j]) {
                 count++;
-            } else {
-                chars[currentIndex] = current;
-                if (count > 1) {
-                    String totalCount = String.valueOf(count);
-                    for (int i = 0; i < totalCount.length(); i++) {
-                        chars[++currentIndex] = totalCount.charAt(i);
-                    }
+                j++;
+            }
+
+            chars[i++] = current;
+
+            if (count > 1) {
+                char[] counts = String.valueOf(count).toCharArray();
+                for (char c : counts) {
+                    chars[i++] = c;
                 }
-                current = c;
-                count = 1;
-                currentIndex++;
             }
         }
 
-        chars[currentIndex] = current;
-        if (count > 1) {
-            String totalCount = String.valueOf(count);
-            for (int i = 0; i < totalCount.length(); i++) {
-                chars[++currentIndex] = totalCount.charAt(i);
-            }
-        }
-
-        return currentIndex + 1;
+        return i;
     }
 }
