@@ -42,6 +42,28 @@ public class AverageOfLevelsInBinaryTree {
         return result;
     }
 
+    public List<Double> averageOfLevelsV2(TreeNode root) {
+        List<Double> averageLevels = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            double sum = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNode current = queue.poll();
+                sum += current.val;
+
+                if (current.left != null) queue.offer(current.left);
+                if (current.right != null) queue.offer(current.right);
+            }
+
+            averageLevels.add(sum / size);
+        }
+
+        return averageLevels;
+    }
+
     public static class TreeNode {
         int val;
         TreeNode left;
