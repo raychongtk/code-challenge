@@ -6,6 +6,15 @@ import java.util.Objects;
  * @author raychong
  */
 public class SameTree {
+    public boolean isSameTreeV2(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+
+        if (p.val != q.val) return false;
+
+        return isSameTreeV2(p.left, q.left) && isSameTreeV2(p.right, q.right);
+    }
+
     public boolean isSameTree(TreeNode p, TreeNode q) {
         var builder1 = new StringBuilder(256);
         var builder2 = new StringBuilder(256);
