@@ -1,11 +1,34 @@
 package tree;
 
 import java.util.Objects;
+import java.util.Stack;
 
 /**
  * @author raychong
  */
 public class SameTree {
+    public boolean isSameTreeV3(TreeNode p, TreeNode q) {
+        Stack<TreeNode> tree1 = new Stack<>();
+        Stack<TreeNode> tree2 = new Stack<>();
+        tree1.push(p);
+        tree2.push(q);
+
+        while (!tree1.isEmpty() && !tree2.isEmpty()) {
+            TreeNode node1 = tree1.pop();
+            TreeNode node2 = tree2.pop();
+
+            if (node1 == null && node2 == null) continue;
+            if (node1 == null || node2 == null || node1.val != node2.val) return false;
+
+            tree1.push(node1.left);
+            tree2.push(node2.left);
+            tree1.push(node1.right);
+            tree2.push(node2.right);
+        }
+
+        return tree1.size() == tree2.size();
+    }
+
     public boolean isSameTreeV2(TreeNode p, TreeNode q) {
         if (p == null && q == null) return true;
         if (p == null || q == null) return false;
