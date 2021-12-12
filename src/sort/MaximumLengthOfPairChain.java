@@ -1,13 +1,14 @@
 package sort;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @author raychong
  */
 public class MaximumLengthOfPairChain {
     public int findLongestChain(int[][] pairs) {
-        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);
+        Arrays.sort(pairs, Comparator.comparingInt(a -> a[1]));
 
         int ans = 1;
         int previous = pairs[0][1];
