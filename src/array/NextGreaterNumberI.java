@@ -1,5 +1,6 @@
 package array;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -12,30 +13,21 @@ public class NextGreaterNumberI {
         Map<Integer, Integer> table = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
         int[] result = new int[nums1.length];
+        Arrays.fill(result, -1);
 
         for (int i = 0; i < nums1.length; i++) {
             table.put(nums1[i], i);
         }
 
-        stack.push(0);
+        stack.push(nums2[0]);
         for (int j = 1; j < nums2.length; j++) {
-            while (!stack.isEmpty() && nums2[stack.peek()] < nums2[j]) {
-                int top = stack.peek();
-                stack.pop();
-                if (table.containsKey(nums2[top])) {
-                    result[table.get(nums2[top])] = nums2[j];
+            while (!stack.isEmpty() && nums2[j] > stack.peek()) {
+                int top = stack.pop();
+                if (table.containsKey(top)) {
+                    result[table.get(top)] = nums2[j];
                 }
             }
-
-            stack.push(j);
-        }
-
-        while (!stack.isEmpty()) {
-            int top = stack.peek();
-            stack.pop();
-            if (table.containsKey(nums2[top])) {
-                result[table.get(nums2[top])] = -1;
-            }
+            stack.push(nums2[j]);
         }
 
         return result;
