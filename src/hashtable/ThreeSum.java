@@ -2,11 +2,7 @@ package hashtable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author raychong
@@ -21,40 +17,33 @@ public class ThreeSum {
     public static List<List<Integer>> threeSum(int[] nums) {
         if (nums.length < 3) return new ArrayList<>();
 
-        Map<Integer, Integer> map = new HashMap<>(10000);
-        Set<List<Integer>> set = new HashSet<>(10000);
-        int left = 0;
-        int numLength = nums.length - 1;
+        Arrays.sort(nums);
 
-        for (int num : nums) {
-            Integer integer = map.getOrDefault(num, 0);
-            map.put(num, integer + 1);
-        }
+        List<List<Integer>> results = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int currentNumber = -nums[i];
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-        while (left < numLength) {
-            int right = numLength;
-            while (right > left) {
-                int key = -(nums[left] + nums[right]);
-                Integer target = map.get(key);
-                if (target != null) {
-                    if ((nums[left] == key || nums[right] == key) && target == 1) {
-                        right--;
-                        continue;
-                    } else if (nums[left] == key && nums[right] == key && target <= 2) {
-                        right--;
-                        continue;
-                    }
+            int start = i + 1;
+            int end = nums.length - 1;
 
-                    int min = Math.min(Math.min(nums[left], nums[right]), key);
-                    int max = Math.max(Math.max(nums[left], nums[right]), key);
-                    int mid = nums[left] + nums[right] + key - min - max;
-                    set.add(Arrays.asList(min, mid, max));
+            while (start < end) {
+                int currentSum = nums[start] + nums[end];
+
+                if (currentSum == currentNumber) {
+                    results.add(List.of(nums[i], nums[start], nums[end]));
+                    while (start < end && nums[start] == nums[start + 1]) start++;
+                    while (start < end && nums[end] == nums[end - 1]) end--;
+                    start++;
+                    end--;
+                } else if (currentSum > currentNumber) {
+                    end--;
+                } else {
+                    start++;
                 }
-                right--;
             }
-            left++;
         }
 
-        return new ArrayList<>(set);
+        return results;
     }
 }
