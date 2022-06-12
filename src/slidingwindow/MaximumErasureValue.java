@@ -47,9 +47,8 @@ public class MaximumErasureValue {
                 currentSum += nums[end];
                 set.add(nums[end]);
                 end++;
+                max = Math.max(max, currentSum);
             }
-
-            max = Math.max(max, currentSum);
         }
 
         return max;
