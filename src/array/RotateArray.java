@@ -6,6 +6,7 @@ package array;
 public class RotateArray {
     public static void main(String[] args) {
         rotate(new int[]{1, 2, 3, 4, 5, 6, 7}, 3);
+        rotateV2(new int[]{1, 2, 3, 4, 5, 6, 7}, 3);
     }
 
     public static void rotate(int[] nums, int k) {
