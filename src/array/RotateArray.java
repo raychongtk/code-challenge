@@ -24,4 +24,25 @@ public class RotateArray {
             end--;
         }
     }
+
+    public static void rotateV2(int[] nums, int k) {
+        if (k % nums.length == 0) return;
+
+        int currentIndex = 0;
+        int start = 0;
+        int previous = 0;
+        int current = nums[0];
+
+        for (int end = 0; end < nums.length; end++) {
+            previous = current;
+            currentIndex = (currentIndex + k) % nums.length;
+            current = nums[currentIndex];
+            nums[currentIndex] = previous;
+
+            if (currentIndex == start) {
+                currentIndex = ++start;
+                current = nums[currentIndex];
+            }
+        }
+    }
 }
