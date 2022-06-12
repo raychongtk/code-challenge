@@ -30,4 +30,28 @@ public class MaximumErasureValue {
 
         return max;
     }
+
+    public int maximumUniqueSubarrayV2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int start = 0;
+        int end = 0;
+        int max = 0;
+        int currentSum = 0;
+
+        while (end < nums.length) {
+            if (set.contains(nums[end])) {
+                set.remove(nums[start]);
+                currentSum -= nums[start];
+                start++;
+            } else {
+                currentSum += nums[end];
+                set.add(nums[end]);
+                end++;
+            }
+
+            max = Math.max(max, currentSum);
+        }
+
+        return max;
+    }
 }
