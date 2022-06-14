@@ -1,2 +1,2 @@
-# LEETCODE
+# Code Challenge
 FOR LEARNING ONLY
