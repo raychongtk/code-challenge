@@ -5,9 +5,9 @@ package hashtable;
  */
 public class LongestWorkSlot {
     public static void main(String[] args) {
-        System.out.println(longestWorkSlot(new int[][]{{0, 3}, {2, 5}, {0, 9}, {1, 15}}));
-        System.out.println(longestWorkSlot(new int[][]{{0, 2}, {1, 3}, {0, 7}}));
-        System.out.println(longestWorkSlot(new int[][]{{0, 1}, {0, 3}, {4, 5}, {5, 6}, {4, 10}}));
+        System.out.println(longestWorkSlot(new int[][]{{0, 3}, {2, 5}, {0, 9}, {1, 15}})); // b
+        System.out.println(longestWorkSlot(new int[][]{{0, 2}, {1, 3}, {0, 7}})); // a
+        System.out.println(longestWorkSlot(new int[][]{{0, 1}, {0, 3}, {4, 5}, {5, 6}, {4, 10}})); // e
     }
 
     public static char longestWorkSlot(int[][] leaveTimes) {
