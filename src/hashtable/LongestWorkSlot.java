@@ -11,15 +11,15 @@ public class LongestWorkSlot {
     }
 
     public static char longestWorkSlot(int[][] leaveTimes) {
-        int max = leaveTimes[0][1];
-        int candidate = 0;
+        int candidate = leaveTimes[0][0];
+        int longest = leaveTimes[0][1];
 
         for (int i = 1; i < leaveTimes.length; i++) {
             int leaveTime = leaveTimes[i][1] - leaveTimes[i - 1][1];
             int currentCandidate = leaveTimes[i][0];
 
-            if (max < leaveTime) {
-                max = leaveTime;
+            if (longest < leaveTime) {
+                longest = leaveTime;
                 candidate = currentCandidate;
             }
         }
