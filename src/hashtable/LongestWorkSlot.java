@@ -1,8 +1,5 @@
 package hashtable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author raychong
  */
@@ -14,25 +11,15 @@ public class LongestWorkSlot {
     }
 
     public static char longestWorkSlot(int[][] leaveTimes) {
-        Map<Integer, Integer> employeeLeaveTimes = new HashMap<>();
-        employeeLeaveTimes.put(leaveTimes[0][0], leaveTimes[0][1]);
-
-        int max = 0;
+        int max = leaveTimes[0][1];
         int candidate = 0;
 
         for (int i = 1; i < leaveTimes.length; i++) {
             int leaveTime = leaveTimes[i][1] - leaveTimes[i - 1][1];
             int currentCandidate = leaveTimes[i][0];
 
-            if (employeeLeaveTimes.containsKey(currentCandidate)) {
-                employeeLeaveTimes.put(currentCandidate, Math.max(employeeLeaveTimes.get(currentCandidate), leaveTime));
-            } else {
-                employeeLeaveTimes.put(currentCandidate, leaveTime);
-            }
-
-            int updatedLeaveTime = employeeLeaveTimes.get(currentCandidate);
-            if (max < updatedLeaveTime) {
-                max = updatedLeaveTime;
+            if (max < leaveTime) {
+                max = leaveTime;
                 candidate = currentCandidate;
             }
         }
