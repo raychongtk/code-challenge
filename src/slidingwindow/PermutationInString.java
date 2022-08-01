@@ -2,10 +2,10 @@ package slidingwindow;
 
 public class PermutationInString {
     public boolean checkInclusion(String s1, String s2) {
-        char[] table = new char[26];
+        int[] table = new int[26];
         int start = 0;
         int windowSize = s1.length() - 1;
-        char[] frequencies = getFrequency(s1);
+        int[] frequencies = getFrequency(s1);
 
         for (int end = 0; end < s2.length(); end++) {
             table[s2.charAt(end) - 'a']++;
@@ -27,8 +27,8 @@ public class PermutationInString {
         return false;
     }
 
-    private char[] getFrequency(String str) {
-        char[] frequencies = new char[26];
+    private int[] getFrequency(String str) {
+        int[] frequencies = new int[26];
         for (char c : str.toCharArray()) {
             frequencies[c - 'a']++;
         }
