@@ -5,29 +5,28 @@ package string;
  */
 public class CountAndSay {
     public String countAndSay(int n) {
-        if (n == 1) return "1";
-
-        var builder = new StringBuilder("1");
-        while (n > 1) {
-            int count = 1;
-            String value = builder.toString();
-            builder.setLength(0);
-
-            char c = value.charAt(0);
-            for (int j = 1; j < value.length(); j++) {
-                if (value.charAt(j) == c) {
-                    count++;
+        StringBuilder builder = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        result.append("1");
+        for (int i = 1; i < n; i++) {
+            char target = result.charAt(0);
+            int currentCount = 1;
+            for (int j = 1; j < result.length(); j++) {
+                char current = result.charAt(j);
+                if (current == target) {
+                    currentCount++;
                 } else {
-                    builder.append(count).append(c);
-                    count = 1;
+                    builder.append(currentCount).append(target);
+                    target = current;
+                    currentCount = 1;
                 }
-                c = value.charAt(j);
+
             }
-
-            builder.append(count).append(c);
-            n--;
+            builder.append(currentCount).append(target);
+            result.setLength(0);
+            result.append(builder);
+            builder.setLength(0);
         }
-
-        return builder.toString();
+        return result.toString();
     }
 }
